@@ -27,7 +27,7 @@ INSERT INTO employees VALUES
 INSERT INTO departments VALUES
 (1, 'Sales'),
 (2, 'Engineering'),
-(3, 'Human Resources'),
+(3, 'Human Resourp ),
 (4, 'Customer Service'),
 (5, 'Research And Development');
 
