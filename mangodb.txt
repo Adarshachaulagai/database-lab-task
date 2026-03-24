@@ -1,0 +1,160 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\L E N O V O> mongosh
+Current Mongosh Log ID: 69c1ec99e34388207f114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+PS C:\Users\L E N O V O> mongosh "mongodb+srv://cluster0.knnihc0.mongodb.net/" --apiVersion 1 --username adarshachaulagai_db_user
+Enter password: ***********
+Current Mongosh Log ID: 69c1ecd0d3762fbe53114029
+Connecting to:          mongodb+srv://<credentials>@cluster0.knnihc0.mongodb.net/?appName=mongosh+2.8.1
+Using MongoDB:          8.0.20 (API Version 1)
+Using Mongosh:          2.8.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+Atlas atlas-rjq1rw-shard-0 [primary] test> show dbs
+sample_mflix  124.38 MiB
+test123        72.00 KiB
+admin         356.00 KiB
+local           5.32 GiB
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.student.find().oretty()
+TypeError: db.student.find().oretty is not a function
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find().oretty()
+TypeError: db.students.find().oretty is not a function
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find().pretty()
+
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.insertMany([{name:"Adarsha"},{age:18},{grade:"A"},{name:"airport_bomber"},{age:19},{grade:"B"},])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c1f1c7d3762fbe5311402a'),
+    '1': ObjectId('69c1f1c7d3762fbe5311402b'),
+    '2': ObjectId('69c1f1c7d3762fbe5311402c'),
+    '3': ObjectId('69c1f1c7d3762fbe5311402d'),
+    '4': ObjectId('69c1f1c7d3762fbe5311402e'),
+    '5': ObjectId('69c1f1c7d3762fbe5311402f')
+  }
+}
+Atlas atlas-rjq1rw-shard-0 [primary] test> show db
+MongoshInvalidInputError: [COMMON-10001] 'db' is not a valid argument for "show".
+Atlas atlas-rjq1rw-shard-0 [primary] test> show dbs
+sample_mflix  124.38 MiB
+test            8.00 KiB
+test123        72.00 KiB
+admin         356.00 KiB
+local           5.32 GiB
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find().pretty()
+[
+  { _id: ObjectId('69c1f1c7d3762fbe5311402a'), name: 'Adarsha' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402b'), age: 18 },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402c'), grade: 'A' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402d'), name: 'airport_bomber' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402e'), age: 19 },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402f'), grade: 'B' }
+]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({age: {$gt: 16}})
+[
+  { _id: ObjectId('69c1f1c7d3762fbe5311402b'), age: 18 },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402e'), age: 19 }
+]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({age: {$gt: 18}})
+[ { _id: ObjectId('69c1f1c7d3762fbe5311402e'), age: 19 } ]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({grade: "A"}].pretty()
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:29)
+
+> 1 | db.students.find({grade: "A"}].pretty()
+    |                              ^
+  2 |
+
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({grade: "A"}],pretty()
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:29)
+
+> 1 | db.students.find({grade: "A"}],pretty()
+    |                              ^
+  2 |
+
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({grade: "A"}).pretty()
+[ { _id: ObjectId('69c1f1c7d3762fbe5311402c'), grade: 'A' } ]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({name :"airport_bomber"}).pretty()
+[
+  { _id: ObjectId('69c1f1c7d3762fbe5311402d'), name: 'airport_bomber' }
+]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({name :"Asarsha"},{$set: {grade:"D"}})
+MongoServerError[Location16410]: Consider using $getField or $setField for a field path with '.' or '$'. :: caused by :: FieldPath field names may not start with '$', given '$set'.
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find({name :"Adarsha"},{$set: {grade:"D"}})
+MongoServerError[Location16410]: Consider using $getField or $setField for a field path with '.' or '$'. :: caused by :: FieldPath field names may not start with '$', given '$set'.
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.updateOne({name :"Adarsha"},{$set: {grade:"D"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.updateMany({age :{$lt: 20}},{$set: {grade:"D"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.deleteOne({name :"Adarsha"})
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.insertMany([{name:"Cat_skucker"},{age:18},{grade:"A"},{name:"Hotel_bomber"},{age:19},{grade:"B"},])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c1f851d3762fbe53114030'),
+    '1': ObjectId('69c1f851d3762fbe53114031'),
+    '2': ObjectId('69c1f851d3762fbe53114032'),
+    '3': ObjectId('69c1f851d3762fbe53114033'),
+    '4': ObjectId('69c1f851d3762fbe53114034'),
+    '5': ObjectId('69c1f851d3762fbe53114035')
+  }
+}
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.countDocuments({grade: "A"})
+2
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.find().sort().pretty()
+[
+  { _id: ObjectId('69c1f1c7d3762fbe5311402b'), age: 18, grade: 'D' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402c'), grade: 'A' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402d'), name: 'airport_bomber' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402e'), age: 19, grade: 'D' },
+  { _id: ObjectId('69c1f1c7d3762fbe5311402f'), grade: 'B' },
+  { _id: ObjectId('69c1f851d3762fbe53114030'), name: 'Cat_skucker' },
+  { _id: ObjectId('69c1f851d3762fbe53114031'), age: 18 },
+  { _id: ObjectId('69c1f851d3762fbe53114032'), grade: 'A' },
+  { _id: ObjectId('69c1f851d3762fbe53114033'), name: 'Hotel_bomber' },
+  { _id: ObjectId('69c1f851d3762fbe53114034'), age: 19 },
+  { _id: ObjectId('69c1f851d3762fbe53114035'), grade: 'B' }
+]
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.updateMany({age :{$lt: 20}},{$set: {grade:"D"}})]
+Uncaught:
+SyntaxError: Missing semicolon. (1:60)
+
+> 1 | db.students.updateMany({age :{$lt: 20}},{$set: {grade:"D"}})]
+    |                                                             ^
+  2 |
+
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.updateMany({},{$set: {city: "Kathmandu"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 11,
+  modifiedCount: 11,
+  upsertedCount: 0
+}
+Atlas atlas-rjq1rw-shard-0 [primary] test> db.students.deleteMany({age:{$gt: 21}})
+{ acknowledged: true, deletedCount: 0 }
+Atlas atlas-rjq1rw-shard-0 [primary
